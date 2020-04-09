@@ -16,7 +16,7 @@
 
 namespace RayTraycing{
 
-	const u_int64_t MAX_MARCHING_STEPS = 32;
+	const u_int64_t MAX_MARCHING_STEPS = 320;
 
 	const double FAR = 1300.0;
 
@@ -91,37 +91,37 @@ namespace RayTraycing{
 		return Vec3(b,b,b);
 	};
 
-	double length(Vec3 vector)
+	inline double length(Vec3 vector)
 	{
 		return sqrt(pow(vector.x, 2) + pow(vector.y, 2) + pow(vector.z, 2));
 	};
 
-	double length(Vec2 vector)
+	inline double length(Vec2 vector)
 	{
 		return sqrt(pow(vector.x, 2) + pow(vector.y, 2));
 	};
 
-	Vec3 normalize(Vec3 vector)
+	inline Vec3 normalize(Vec3 vector)
 	{
 		return vector / length(vector);
 	};
 
-	double radians(double angleDegrees)
+	inline double radians(double angleDegrees)
 	{
 		return (angleDegrees) * M_PI / 180.0;
 	};
 
-	double dot(Vec3 a, Vec3 b)
+	inline double dot(Vec3 a, Vec3 b)
 	{
 		return a.x*b.x + a.y*b.y + a.z*b.z;
 	};
 
-	double Sphere(Vec3 start_point, double rad)
+	inline double Sphere(Vec3 start_point, double rad)
 	{
 		return length(start_point) - rad;
 	};
 
-	double Cube( Vec3 p, Vec3 b )
+	inline double Cube( Vec3 p, Vec3 b )
 	{
 	    Vec3 d = Vec3(abs(p.x),abs(p.y),abs(p.z)) - b;
 	    return min(max(d.x,max(d.y,d.z)),0.0) + length(max(d, 0.0));
@@ -131,14 +131,14 @@ namespace RayTraycing{
 	{
 		double figures[] = 
 		{
-			// Sphere(pos, 80.0),
-			// Sphere(pos - Vec3(80.0,0.0,0.0), 80.0),
-			Cube(pos, Vec3(60.0,60.0,60.0))
+			Sphere(pos, 80.0),
+			Sphere(pos - Vec3(80.0,0.0,0.0), 80.0)
+			// Cube(pos, Vec3(60.0,60.0,60.0))
 		};
 		return min(figures, sizeof(figures)/sizeof(*figures));
 	};
 
-	Vec3 getNormal(Vec3 p)
+	inline Vec3 getNormal(Vec3 p)
 	{
 		return normalize(
 			Vec3(
@@ -149,7 +149,7 @@ namespace RayTraycing{
 			);
 	};
 
-	double vectorsDist(Vec3 v1, Vec3 v2)
+	inline double vectorsDist(Vec3 v1, Vec3 v2)
 	{
 		return sqrt(pow(v1.x - v2.x , 2) + pow(v1.y - v2.y , 2) + pow(v1.z - v2.z , 2));
 	};
@@ -173,7 +173,7 @@ namespace RayTraycing{
 		return FAR;
 	};
 
-	Vec3 cross(Vec3 v1, Vec3 v2)
+	inline Vec3 cross(Vec3 v1, Vec3 v2)
 	{
 		return Vec3(v1.y*v2.z - v2.y*v1.z,
 					v1.z*v2.x - v2.x*v1.z,
@@ -203,11 +203,11 @@ namespace RayTraycing{
 			{
 				return FAR;
 			};
-			if(res <= EPSILON)
+			if(dest <= EPSILON)
 			{
 				return res;
 			};
-			direction = direction + Vec2(cam_pos.x, cam_pos.y) + res;
+			direction = direction + Vec2(cam_pos.x, cam_pos.y) + dest;
 		}
 		return FAR;
 	};
@@ -221,20 +221,22 @@ int main(int argc, char const *argv[])
 	SDL_Event event;
 	SDL_CreateWindowAndRenderer(512, 512, 0, &window, &renderer);
 
-	double cam_x_pos = -270;
-	double cam_y_pos = -248;
-	double cam_z_pos = 0;
+	double cam_x_pos = -395.702;
+	double cam_y_pos = 32.2979;
+	double cam_z_pos = 60;
 
-	double cam_x_direction = 1;
-	double cam_y_direction = 1;
-	double cam_z_direction = 1;
+	double cam_x_direction = 0;
+	double cam_y_direction = 0;
+	double cam_z_direction = 0;
 
-	programm_start:
+	RENDER:
 
 	RayTraycing::Vec3 cam(cam_x_pos, cam_y_pos, cam_z_pos);
 	RayTraycing::Vec3 cam_direction(cam_x_direction, cam_y_direction, cam_z_direction);
 
 	RayTraycing::Vec3 pixel(1, 0, 0);
+
+	std::cout<<"Starting render...."<<'\n';
 
 	for (u_int64_t x = 0; x < 512; ++x)
 	for (u_int64_t y = 0; y < 512; ++y)
@@ -284,13 +286,39 @@ int main(int argc, char const *argv[])
 				std::cout<<"X pos ="<<cam_x_pos<<'\n';
 				std::cout<<"Y pos ="<<cam_y_pos<<'\n';
 
-				goto programm_start;
+				goto RENDER;
 			}
 
 			if (event.button.button == SDL_BUTTON_MIDDLE)
 			{
 				/* code */
-			}
+			};
+
+			if(event.type == SDL_MOUSEWHEEL)
+		    {
+		    	RayTraycing::Vec3 cam_norm = normalize(cam) + 0.1;
+		    	if(event.wheel.y > 0) // scroll up
+		    	{
+		    		cam_x_pos += cam_norm.x;
+		    		cam_y_pos += cam_norm.y;
+		    		cam_z_pos += cam_norm.z;
+		    	}
+		    	else if(event.wheel.y < 0) // scroll down
+		    	{
+		    		cam_x_pos -= cam_norm.x;
+		    		cam_y_pos -= cam_norm.y;
+		    		cam_z_pos -= cam_norm.z;
+		    	};
+		    	std::cout<<"cam_x_pos="<<cam_x_pos
+						 <<" cam_y_pos="<<cam_y_pos
+						 <<" cam_z_pos="<<cam_z_pos<<'\n';
+
+				std::cout<<"cam_x_norm="<<cam_norm.x
+						 <<" cam_y_norm="<<cam_norm.y
+						 <<" cam_z_norm="<<cam_norm.z<<'\n';
+		    	goto RENDER;
+		    }
+
 		};
 		SDL_Delay(90);
 	};
