@@ -62,7 +62,7 @@ RGB traceRay(double maxRayLength, Vec3 & startPoint, Vec3 & tracingNorm, Vec3 & 
         if(nearestObject->dest <= NEAR)
         {
             double light = getLight(maxRayLength - rayLength, currPoint, getNormal(currPoint), lightPos, lightPower);
-            double colourLight = abs(1000 / ( light / ( rayLength ) ));
+            double colourLight = abs(500 / ( light / ( rayLength * 30 ) ));
 
             return {
                         (uint8_t)(nearestObject->color.r * colourLight),
