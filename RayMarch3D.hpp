@@ -38,7 +38,7 @@ ListNode * addNode(void * data);
 Object * getNearestObjectDest(Vec3 & point);
 RGB traceRay(double maxRayLength, Vec3 & startPoint, Vec3 & tracingNorm, Vec3 & lightPos, double lightPower);
 
-double getLight(Vec3 & obj, Vec3 & light);
+double getLight(double maxRayLength, Vec3 & startPoint, Vec3 tracingNorm, Vec3 & lightPos, double lightPower);
 
 double dot(Vec3 & a, Vec3 & b);
 

@@ -12,11 +12,13 @@ size_t windowHeight = 255;
 size_t windowXResolution = windowWidth;
 size_t windowYResolution = windowHeight;
 
-double lightPower = 1000;
-Vec3 lightPos = {0,0,0};
+double lightPower = 500;
+Vec3 lightPos = {0,0,-1};
 
 double camXYAngle = 0;
 double camZYAngle = M_PI_2;
+
+double FOV = 500;
 
 double sphere(Vec3 point)
 {
@@ -26,11 +28,11 @@ double sphere(Vec3 point)
 
 double infiniteDownSurface(Vec3 point)
 {
-    return ( 60 - sin(point.y/10) * 10 - sin(point.x/10) * 10) + point.z;
+    return ( 200 - sin(point.y/10) * 10 - sin(point.x/10) * 10) - point.z;
 };
 double infiniteYSidedSurface(Vec3 point)
 {
-return  60 - point.y;
+    return  60 - point.y;
 };
 
 void render(SDL_Renderer * renderer, size_t HEIGHT, size_t WIDTH, double maxRayLength)
@@ -42,7 +44,7 @@ void render(SDL_Renderer * renderer, size_t HEIGHT, size_t WIDTH, double maxRayL
         for(size_t y = 0; y < HEIGHT; ++y)
         {
             Vec3 startPoint = {0, 0, 0};
-            Vec3 tracingNormal = {x - (double)WIDTH/2, 20, (double)HEIGHT/2 - y};
+            Vec3 tracingNormal = {x - (double)WIDTH/2, 20, y - (double)HEIGHT/2};
 
             // double aYX = tracingNormal.angleYX();
             // double aZY = tracingNormal.angleZY();
@@ -153,7 +155,7 @@ int main()
                 break;
             }
         };
-        render(mainWindowRenderer, windowHeight, windowWidth, 150.0);
+        render(mainWindowRenderer, windowHeight, windowWidth, FOV);
         SDL_Delay(10);
     };
     SDL_Quit();

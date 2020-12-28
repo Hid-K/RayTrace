@@ -61,7 +61,7 @@ RGB traceRay(double maxRayLength, Vec3 & startPoint, Vec3 & tracingNorm, Vec3 & 
         rayLength += nearestObject->dest;
         if(nearestObject->dest <= NEAR)
         {
-            double light = getLight(currPoint, lightPos) * lightPower;
+            double light = getLight(maxRayLength - rayLength, currPoint, getNormal(currPoint), lightPos, lightPower);
             double colourLight = abs(1000 / ( light / ( rayLength ) ));
 
             return {
@@ -70,22 +70,44 @@ RGB traceRay(double maxRayLength, Vec3 & startPoint, Vec3 & tracingNorm, Vec3 & 
                         (uint8_t)(nearestObject->color.b * colourLight)
                     };
         };
-        Vec3 dCurrPoint = tracingNorm * getNearestObject(currPoint)->dest;
+        Vec3 dCurrPoint = tracingNorm * nearestObject->dest;
         currPoint += dCurrPoint;
     };
     return {0,0,0};
 };
 
-double getLight(Vec3 & point, Vec3 & lightPos)
+double getLight(double maxRayLength, Vec3 & startPoint, Vec3 tracingNorm, Vec3 & lightPos, double lightPower)
 {
-    if( lightPos.dest( point + ( getNormal(point) * lightPos.dest(point) ) ) <= 1000 )
+    Vec3 currPoint = startPoint;
+    double rayLength = 0.0;
+    for(; rayLength <= maxRayLength;)
     {
-        return lightPos.dest(point);
-    } else 
-    {
-        return 0;
+        double nearestObjectDest = getNearestObject(currPoint)->dest;
+        rayLength += nearestObjectDest;
+        if(nearestObjectDest <= NEAR)
+        {
+            tracingNorm = getNormal(currPoint);
+            if(lightPos.dest(currPoint) <= lightPower)
+            {
+                return lightPos.dest(currPoint) * lightPower;
+            };
+        };
+        Vec3 dCurrPoint = tracingNorm * nearestObjectDest;
+        currPoint += dCurrPoint;
     };
+    return 0;
 };
+
+// double getLight(Vec3 & point, Vec3 & lightPos)
+// {
+//     if( lightPos.dest( point + ( getNormal(point) * lightPos.dest(point) ) ) <= 1000 )
+//     {
+//         return lightPos.dest(point);
+//     } else 
+//     {
+//         return 0;
+//     };
+// };
 
 inline Vec3 getNormal(Vec3 & p)
 {
