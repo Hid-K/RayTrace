@@ -1,0 +1,77 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "2.8"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "Raymarcher",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "MathVectors_LIBRARY::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-MathVectors_LIBRARY-Debug-396b8a086a586e4cf3ee.json",
+					"name" : "MathVectors_LIBRARY",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "RayMarch3D_LIBRARY::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-RayMarch3D_LIBRARY-Debug-72f328d79e15aeaabf3b.json",
+					"name" : "RayMarch3D_LIBRARY",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "Raymarcher::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-Raymarcher-Debug-10f8807e7d2757ae4988.json",
+					"name" : "Raymarcher",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/Users/laptevaleksander/Documents/Projects/RayTrace/build",
+		"source" : "/Users/laptevaleksander/Documents/Projects/RayTrace"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 1
+	}
+}

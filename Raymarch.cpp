@@ -1,6 +1,6 @@
 #include <cmath>
 #include <math.h>
-#include <SDL2/SDL.h>
+#include <SDL.h>
 #include <iostream>
 
 #define CAM_POS_X 0
@@ -154,7 +154,7 @@ namespace RayTraycing{
 		return sqrt(pow(v1.x - v2.x , 2) + pow(v1.y - v2.y , 2) + pow(v1.z - v2.z , 2));
 	};
 
-	double getDistance(Vec3 cam, Vec2 direction)
+	double getDistance(Vec3 cam, Vec3 direction)
 	{
 		double depth =  0;
 		for (u_int64_t i = 0; i < MAX_MARCHING_STEPS; ++i)
@@ -188,7 +188,14 @@ namespace RayTraycing{
 		return normalize(side * p.x + up * p.y + dir * z);
 	};
 
-	double render(Vec3 cam_pos, Vec2 direction)
+	double getLight(Vec3 p, Vec3 light)
+	{
+		Vec3 l = normalize(light - p);
+		Vec3 n = getNormal(p);
+		return dot(n, {1,1,1});
+	};
+
+	double render(Vec3 cam_pos, Vec3 direction)
 	{
 		double res = 0.0;
 		for (u_int64_t i = 0; i < MAX_MARCHING_STEPS; ++i)
@@ -197,7 +204,7 @@ namespace RayTraycing{
 			res += dest;
 			if(res == NEAR)
 			{
-				return res;
+				return res + getLight(direction, {20,20,20});
 			};
 			if(res >= FAR)
 			{
@@ -241,8 +248,8 @@ int main(int argc, char const *argv[])
 	for (u_int64_t x = 0; x < 512; ++x)
 	for (u_int64_t y = 0; y < 512; ++y)
 	{
-		pixel.x=pixel.y=pixel.z = RayTraycing::render(cam, {(x - cam_direction.x),
-															(y - cam_direction.y)});
+		pixel.x=pixel.y=pixel.z = (int)RayTraycing::render(cam, {(x - cam_direction.x),
+																 (y - cam_direction.y), cam_direction.z}) % 255;
 
 		SDL_SetRenderDrawColor(renderer, pixel.x, pixel.y, pixel.x, 255);
 
@@ -251,10 +258,9 @@ int main(int argc, char const *argv[])
 	SDL_RenderPresent(renderer);
 
 	bool quit = 0;
-
-	while(!quit)
+	for(;quit == 0;)
 	{
-		while(SDL_PollEvent(&event))
+		for(;SDL_PollEvent(&event);)
 		{
 			if (event.type == SDL_QUIT)
 			{
@@ -271,7 +277,7 @@ int main(int argc, char const *argv[])
 				int stop_x1 = 0;
 				int stop_y1 = 0;
 
-				while(event.button.button == SDL_BUTTON_LEFT)
+				for(;event.button.button == SDL_BUTTON_LEFT;)
 				{
 					// std::cout<<"Gettihg mouce pos."<<'\n';
 					stop_x1 = event.button.x;
@@ -320,7 +326,7 @@ int main(int argc, char const *argv[])
 		    }
 
 		};
-		SDL_Delay(90);
+		SDL_Delay(10);
 	};
 
 	return 0;

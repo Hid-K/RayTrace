@@ -1,0 +1,17 @@
+[
+{
+  "directory": "/Users/laptevaleksander/Documents/Projects/RayTrace/build",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/c++ -I/usr/local/Cellar/sdl2/2.0.12_1/include/SDL2 -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk -std=gnu++11 -o CMakeFiles/Raymarcher.dir/main.cpp.o -c /Users/laptevaleksander/Documents/Projects/RayTrace/main.cpp",
+  "file": "/Users/laptevaleksander/Documents/Projects/RayTrace/main.cpp"
+},
+{
+  "directory": "/Users/laptevaleksander/Documents/Projects/RayTrace/build",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/c++ -I/usr/local/Cellar/sdl2/2.0.12_1/include/SDL2 -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk -std=gnu++11 -o CMakeFiles/RayMarch3D_LIBRARY.dir/RayMarch3D.cpp.o -c /Users/laptevaleksander/Documents/Projects/RayTrace/RayMarch3D.cpp",
+  "file": "/Users/laptevaleksander/Documents/Projects/RayTrace/RayMarch3D.cpp"
+},
+{
+  "directory": "/Users/laptevaleksander/Documents/Projects/RayTrace/build",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/c++ -I/usr/local/Cellar/sdl2/2.0.12_1/include/SDL2 -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk -std=gnu++11 -o CMakeFiles/MathVectors_LIBRARY.dir/MathVectors.cpp.o -c /Users/laptevaleksander/Documents/Projects/RayTrace/MathVectors.cpp",
+  "file": "/Users/laptevaleksander/Documents/Projects/RayTrace/MathVectors.cpp"
+}
+]
