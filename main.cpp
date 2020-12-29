@@ -2,6 +2,7 @@
 #include <iostream>
 #include "MathVectors.hpp"
 #include "RayMarch3D.hpp"
+#include <chrono>
 
 size_t windowWidthDefault = 255;
 size_t windowHeightDefault = 255;
@@ -37,7 +38,7 @@ double infiniteYSidedSurface(Vec3 point)
 
 void render(SDL_Renderer * renderer, size_t HEIGHT, size_t WIDTH, double maxRayLength)
 {
-    double t0 = time(nullptr);
+    auto t0 = std::chrono::high_resolution_clock::now();
     SDL_RenderClear(renderer);
     for(size_t x = 0; x < WIDTH; ++x)
     {
@@ -73,8 +74,8 @@ void render(SDL_Renderer * renderer, size_t HEIGHT, size_t WIDTH, double maxRayL
         };
     };
     SDL_RenderPresent(renderer);
-    double t1 = time(nullptr);
-    std::cout<<1/(t1 - t0)<<" FPS"<<std::endl;
+    auto t1 = std::chrono::high_resolution_clock::now();
+    std::cout<<( (double)std::chrono::nanoseconds(1000000000).count() / ( (double)( (t1.time_since_epoch() - t0.time_since_epoch() ).count() ) ) )<<" FPS"<<std::endl;
 };
 
 
