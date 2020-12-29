@@ -37,7 +37,7 @@ double infiniteYSidedSurface(Vec3 point)
 
 void render(SDL_Renderer * renderer, size_t HEIGHT, size_t WIDTH, double maxRayLength)
 {
-    camXYAngle += M_PI_4/10;
+    double t0 = time(nullptr);
     SDL_RenderClear(renderer);
     for(size_t x = 0; x < WIDTH; ++x)
     {
@@ -73,6 +73,8 @@ void render(SDL_Renderer * renderer, size_t HEIGHT, size_t WIDTH, double maxRayL
         };
     };
     SDL_RenderPresent(renderer);
+    double t1 = time(nullptr);
+    std::cout<<1/(t1 - t0)<<" FPS"<<std::endl;
 };
 
 
