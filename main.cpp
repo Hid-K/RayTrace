@@ -75,7 +75,7 @@ void render(SDL_Renderer * renderer, size_t HEIGHT, size_t WIDTH, double maxRayL
     };
     SDL_RenderPresent(renderer);
     double t1 = time(nullptr);
-    std::cout<<(t1 - t0)/60<<" FPS"<<std::endl;
+    std::cout<<1/(t1 - t0)<<" FPS"<<std::endl;
 };
 
 
