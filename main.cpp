@@ -40,6 +40,7 @@ double infiniteYSidedSurface(Vec3 point)
 
 void render(SDL_Renderer * renderer, size_t HEIGHT, size_t WIDTH, double maxRayLength)
 {
+    double t0 = time(nullptr);
     static double a = 0;
     a++;
     if(a > M_PI * 2)
@@ -64,6 +65,8 @@ void render(SDL_Renderer * renderer, size_t HEIGHT, size_t WIDTH, double maxRayL
         };
     };
     SDL_RenderPresent(renderer);
+    double t1 = time(nullptr);
+    std::cout<<(t1 - t0)/60<<" FPS"<<std::endl;
 };
 
 
