@@ -38,6 +38,15 @@ double infiniteYSidedSurface(Vec3 point)
     return  60 - point.y;
 };
 
+void drpr(double maxRayLength, Vec3 startPoint, Vec3 tracingNormal, Vec3 lightPos, double lightPower,
+          SDL_Renderer * renderer, size_t x, size_t y)
+{
+    RGB currPointColor = traceRay(maxRayLength, startPoint, tracingNormal, lightPos, lightPower);
+    std::lock_guard<std::mutex> guard(mainWindowRendererMutex);
+    SDL_SetRenderDrawColor(renderer, currPointColor.r, currPointColor.g, currPointColor.b, 255);
+    SDL_RenderDrawPoint(renderer, x*(windowWidth/windowWidthDefault), y*(windowHeight/windowHeightDefault));
+};
+
 void render(SDL_Renderer * renderer, size_t HEIGHT, size_t WIDTH, double maxRayLength)
 {
     double t0 = time(nullptr);
@@ -58,10 +67,10 @@ void render(SDL_Renderer * renderer, size_t HEIGHT, size_t WIDTH, double maxRayL
             Vec3 tracingNormal = {x - (double)WIDTH/2, 20, y - (double)HEIGHT/2};
 
             tracingNormal = tracingNormal.normalized();
+            
 
-            RGB currPointColor = traceRay(maxRayLength, startPoint, tracingNormal, lightPos, lightPower);
-            SDL_SetRenderDrawColor(renderer, currPointColor.r, currPointColor.g, currPointColor.b, 255);
-            SDL_RenderDrawPoint(renderer, x*(windowWidth/windowWidthDefault), y*(windowHeight/windowHeightDefault));
+            std::thread(drpr, maxRayLength, startPoint, tracingNormal, lightPos, lightPower,
+          renderer, x, y).detach();
         };
     };
     SDL_RenderPresent(renderer);
