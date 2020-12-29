@@ -14,12 +14,12 @@ size_t windowXResolution = windowWidth;
 size_t windowYResolution = windowHeight;
 
 double lightPower = 500;
-Vec3 lightPos = {0,0,-1};
+Vec3 lightPos = {0,0,1};
 
 double camXYAngle = 0;
 double camZYAngle = M_PI_2;
 
-double FOV = 500;
+double FOV = 200;
 
 double sphere(Vec3 point)
 {
@@ -39,6 +39,13 @@ double infiniteYSidedSurface(Vec3 point)
 void render(SDL_Renderer * renderer, size_t HEIGHT, size_t WIDTH, double maxRayLength)
 {
     auto t0 = std::chrono::high_resolution_clock::now();
+    static double a = 0;
+    lightPos.x = cos(a);
+    lightPos.y = sin(a);
+    if(( a += 0.5 ) >= M_PI * 2)
+    {
+        a = 0;
+    };
     SDL_RenderClear(renderer);
     for(size_t x = 0; x < WIDTH; ++x)
     {
