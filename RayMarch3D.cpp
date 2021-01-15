@@ -15,6 +15,12 @@ ListNode * getNode(size_t nodeNo)
     };
     return currNode;
 };
+
+size_t getNodesCount()
+{
+    return 3;
+};
+
 ListNode * addNode(void * data)
 {
     ListNode * currNode = firstObjectNode;
@@ -38,14 +44,16 @@ ListNode * addNode(void * data)
 Object * getNearestObject(Vec3 & point)
 {
     ListNode * currObjNode = firstObjectNode;
+    double currObjDest;
 
     Object * nearestObject = ( (Object*)(currObjNode->data) );
-    nearestObject->dest = nearestObject->destFunc(point);
+    double nearestObjectdest = nearestObject->destFunc(point);
     for(;currObjNode != NULL;)
     {
-        if( ( ( (Object*)(currObjNode->data) )->dest = ( (Object*)(currObjNode->data) )->destFunc(point) ) < nearestObject->dest)
+        if( ( currObjDest = ( (Object*)(currObjNode->data) )->destFunc(point) ) < nearestObjectdest)
         {
             nearestObject = ( (Object*)(currObjNode->data) );
+            nearestObjectdest = currObjDest;
         };
         currObjNode = currObjNode->nextNode;
     };
@@ -58,19 +66,28 @@ RGB traceRay(double maxRayLength, Vec3 & startPoint, Vec3 & tracingNorm, Vec3 & 
     for(double rayLength = 0.0; rayLength <= maxRayLength;)
     {
         Object * nearestObject = getNearestObject(currPoint);
-        rayLength += nearestObject->dest;
-        if(nearestObject->dest <= NEAR)
+        double nearestObjectDest = nearestObject->destFunc(currPoint);
+        rayLength += nearestObjectDest;
+        if(nearestObjectDest <= NEAR)
         {
-            double light = getLight(maxRayLength - rayLength, currPoint, getNormal(currPoint), lightPos, lightPower);
-            double colourLight = abs(1000 / ( light / ( rayLength ) ));
+            double light = getLight(maxRayLength - rayLength, currPoint, getNormal(currPoint), lightPos, lightPower) / 100;
+
+            size_t r = nearestObject->color.r / light;
+            if(r > 255) r = 255;
+
+            size_t g = nearestObject->color.g / light;
+            if(g > 255) g = 255;
+
+            size_t b = nearestObject->color.b / light;
+            if(b > 255) b = 255;
 
             return {
-                        (uint8_t)(nearestObject->color.r * colourLight),
-                        (uint8_t)(nearestObject->color.g * colourLight),
-                        (uint8_t)(nearestObject->color.b * colourLight)
+                        (uint8_t)(r),
+                        (uint8_t)(g),
+                        (uint8_t)(b)
                     };
         };
-        Vec3 dCurrPoint = tracingNorm * nearestObject->dest;
+        Vec3 dCurrPoint = tracingNorm * nearestObjectDest;
         currPoint += dCurrPoint;
     };
     return {0,0,0};
@@ -82,14 +99,14 @@ double getLight(double maxRayLength, Vec3 & startPoint, Vec3 tracingNorm, Vec3 &
     double rayLength = 0.0;
     for(; rayLength <= maxRayLength;)
     {
-        double nearestObjectDest = getNearestObject(currPoint)->dest;
+        double nearestObjectDest = getNearestObject(currPoint)->destFunc(currPoint);
         rayLength += nearestObjectDest;
         if(nearestObjectDest <= NEAR)
         {
-            tracingNorm = getNormal(currPoint);
+            tracingNorm = currPoint - lightPos;
             if(lightPos.dest(currPoint) <= lightPower)
             {
-                return lightPos.dest(currPoint) * lightPower;
+                return lightPos.dest(currPoint);
             };
         };
         Vec3 dCurrPoint = tracingNorm * nearestObjectDest;
@@ -119,9 +136,9 @@ inline Vec3 getNormal(Vec3 & p)
     Vec3 v5 = {p.x, p.y, p.z - NEAR};
 
     Vec3 res = {
-            getNearestObject(v0)->dest - getNearestObject(v1)->dest,
-            getNearestObject(v2)->dest - getNearestObject(v3)->dest,
-            getNearestObject(v4)->dest - getNearestObject(v5)->dest
+            getNearestObject(v0)->destFunc(p) - getNearestObject(v1)->destFunc(p),
+            getNearestObject(v2)->destFunc(p) - getNearestObject(v3)->destFunc(p),
+            getNearestObject(v4)->destFunc(p) - getNearestObject(v5)->destFunc(p)
         };
     return res.normalized();
 };

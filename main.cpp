@@ -13,13 +13,13 @@ size_t windowHeight = 255;
 size_t windowXResolution = windowWidth;
 size_t windowYResolution = windowHeight;
 
-double lightPower = 500;
-Vec3 lightPos = {0,0,1};
+double lightPower = 1000;
+Vec3 lightPos = {0,0,100};
 
 double camXYAngle = 0;
 double camZYAngle = M_PI_2;
 
-double FOV = 200;
+double FOV = 500;
 
 double sphere(Vec3 point)
 {
@@ -35,13 +35,20 @@ double infiniteYSidedSurface(Vec3 point)
 {
     return  60 - point.y;
 };
+void renderPixel(double maxRayLength, Vec3 startPoint, Vec3 tracingNormal, SDL_Renderer * renderer, size_t x, size_t y)
+{
+    RGB currPointColor = traceRay(maxRayLength, startPoint, tracingNormal, lightPos, lightPower);
+    SDL_SetRenderDrawColor(renderer, currPointColor.r, currPointColor.g, currPointColor.b, 255);
+    SDL_RenderDrawPoint(renderer, x*(windowWidth/windowWidthDefault), y*(windowHeight/windowHeightDefault));
+};
+
 
 void render(SDL_Renderer * renderer, size_t HEIGHT, size_t WIDTH, double maxRayLength)
 {
     auto t0 = std::chrono::high_resolution_clock::now();
     static double a = 0;
-    lightPos.x = cos(a);
-    lightPos.y = sin(a);
+    lightPos.x = cos(a)*100;
+    lightPos.y = sin(a)*100;
     if(( a += 0.5 ) >= M_PI * 2)
     {
         a = 0;
@@ -54,30 +61,9 @@ void render(SDL_Renderer * renderer, size_t HEIGHT, size_t WIDTH, double maxRayL
             Vec3 startPoint = {0, 0, 0};
             Vec3 tracingNormal = {x - (double)WIDTH/2, 20, y - (double)HEIGHT/2};
 
-            // double aYX = tracingNormal.angleYX();
-            // double aZY = tracingNormal.angleZY();
-
-            // double tracingNormalLen = tracingNormal.length();
-
-            // tracingNormal = 
-            // {
-            //     tracingNormalLen * cos(camXYAngle+aYX),
-            //     tracingNormalLen * sin(camXYAngle+aYX),
-            //     tracingNormal.z
-            // };
-
-            // tracingNormal = 
-            // {
-            //     tracingNormal.x,
-            //     tracingNormal.y * cos(camZYAngle-aZY),
-            //     tracingNormal.y * sin(camZYAngle-aZY)
-            // };
-
             tracingNormal = tracingNormal.normalized();
             
-            RGB currPointColor = traceRay(maxRayLength, startPoint, tracingNormal, lightPos, lightPower);
-            SDL_SetRenderDrawColor(renderer, currPointColor.r, currPointColor.g, currPointColor.b, 255);
-            SDL_RenderDrawPoint(renderer, x*(windowWidth/windowWidthDefault), y*(windowHeight/windowHeightDefault));
+            renderPixel(maxRayLength, startPoint, tracingNormal, renderer, x, y);
         };
     };
     SDL_RenderPresent(renderer);
@@ -117,13 +103,13 @@ int main()
     SDL_Event event;
     char quit = 0;
 
-    Object sp = {0.0, {255,0,0}, sphere};
+    Object sp = {{255,0,0}, sphere};
     addNode(&sp);
 
-    Object Zsurface = {0.0, {0,255,0}, infiniteDownSurface};
+    Object Zsurface = {{0,255,0}, infiniteDownSurface};
     addNode(&Zsurface);
 
-    Object Ysurface = {0.0, {0,0,255}, infiniteYSidedSurface};
+    Object Ysurface = {{0,0,255}, infiniteYSidedSurface};
     addNode(&Ysurface);
 
     for(;quit == 0;)

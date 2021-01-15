@@ -23,7 +23,6 @@ struct ListNode
 
 struct Object
 {
-    double dest;
     RGB color;
     double (*destFunc)(Vec3 point);
 };
