@@ -42,21 +42,21 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "MathVectors_LIBRARY::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-MathVectors_LIBRARY-Debug-396b8a086a586e4cf3ee.json",
+					"jsonFile" : "target-MathVectors_LIBRARY-Debug-9df3e21f32cd9e815eb3.json",
 					"name" : "MathVectors_LIBRARY",
 					"projectIndex" : 0
 				},
 				{
 					"directoryIndex" : 0,
 					"id" : "RayMarch3D_LIBRARY::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-RayMarch3D_LIBRARY-Debug-72f328d79e15aeaabf3b.json",
+					"jsonFile" : "target-RayMarch3D_LIBRARY-Debug-e8cde9ca9814429ccfb6.json",
 					"name" : "RayMarch3D_LIBRARY",
 					"projectIndex" : 0
 				},
 				{
 					"directoryIndex" : 0,
 					"id" : "Raymarcher::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-Raymarcher-Debug-10f8807e7d2757ae4988.json",
+					"jsonFile" : "target-Raymarcher-Debug-8a780245948218c19bb5.json",
 					"name" : "Raymarcher",
 					"projectIndex" : 0
 				}
@@ -72,6 +72,6 @@
 	"version" : 
 	{
 		"major" : 2,
-		"minor" : 1
+		"minor" : 2
 	}
 }

@@ -71,10 +71,18 @@
 			[
 				{
 					"backtrace" : 5,
-					"path" : "/usr/local/Cellar/sdl2/2.0.12_1/include/SDL2"
+					"path" : "/usr/local/Cellar/sdl2/2.0.14_1/include/SDL2"
 				}
 			],
 			"language" : "CXX",
+			"languageStandard" : 
+			{
+				"backtraces" : 
+				[
+					1
+				],
+				"standard" : "11"
+			},
 			"sourceIndexes" : 
 			[
 				0
@@ -107,7 +115,7 @@
 			},
 			{
 				"backtrace" : 2,
-				"fragment" : "-L/usr/local/Cellar/sdl2/2.0.12_1/lib  -lSDL2",
+				"fragment" : "-L/usr/local/Cellar/sdl2/2.0.14_1/lib  -lSDL2",
 				"role" : "libraries"
 			},
 			{

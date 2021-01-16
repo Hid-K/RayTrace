@@ -5,8 +5,6 @@
 #include <chrono>
 #include <thread>
 
-std::mutex mainWindowRendererMutex;
-
 size_t windowWidthDefault = 255;
 size_t windowHeightDefault = 255;
 
@@ -41,7 +39,6 @@ double infiniteYSidedSurface(Vec3 point)
 void renderPixel(double maxRayLength, Vec3 startPoint, Vec3 tracingNormal, SDL_Renderer * renderer, size_t x, size_t y)
 {
     RGB currPointColor = traceRay(maxRayLength, startPoint, tracingNormal, lightPos, lightPower);
-    std::lock_guard<std::mutex> guard(mainWindowRendererMutex);
     SDL_SetRenderDrawColor(renderer, currPointColor.r, currPointColor.g, currPointColor.b, 255);
     SDL_RenderDrawPoint(renderer, x*(windowWidth/windowWidthDefault), y*(windowHeight/windowHeightDefault));
 };
@@ -67,7 +64,7 @@ void render(SDL_Renderer * renderer, size_t HEIGHT, size_t WIDTH, double maxRayL
 
             tracingNormal = tracingNormal.normalized();
             
-            std::thread(renderPixel, maxRayLength, startPoint, tracingNormal, renderer, x, y).detach();
+            renderPixel(maxRayLength, startPoint, tracingNormal, renderer, x, y);
         };
     };
     SDL_RenderPresent(renderer);
