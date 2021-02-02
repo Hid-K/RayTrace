@@ -24,7 +24,9 @@ struct ListNode
 struct Object
 {
     RGB color;
-    double (*destFunc)(Vec3 point);
+    Vec3 originPos;
+    double (*destFunc)(Vec3 point, Object * self);
+    Vec3 (*getNormal)(Vec3 point, Object * self);
 };
 
 const double NEAR = 0.0001;

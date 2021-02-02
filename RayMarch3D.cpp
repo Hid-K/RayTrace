@@ -47,10 +47,10 @@ Object * getNearestObject(Vec3 & point)
     double currObjDest;
 
     Object * nearestObject = ( (Object*)(currObjNode->data) );
-    double nearestObjectdest = nearestObject->destFunc(point);
+    double nearestObjectdest = nearestObject->destFunc(point, nearestObject);
     for(;currObjNode != NULL;)
     {
-        if( ( currObjDest = ( (Object*)(currObjNode->data) )->destFunc(point) ) < nearestObjectdest)
+        if( ( currObjDest = ( (Object*)(currObjNode->data) )->destFunc(point, nearestObject) ) < nearestObjectdest)
         {
             nearestObject = ( (Object*)(currObjNode->data) );
             nearestObjectdest = currObjDest;
@@ -66,11 +66,11 @@ RGB traceRay(double maxRayLength, Vec3 & startPoint, Vec3 & tracingNorm, Vec3 & 
     for(double rayLength = 0.0; rayLength <= maxRayLength;)
     {
         Object * nearestObject = getNearestObject(currPoint);
-        double nearestObjectDest = nearestObject->destFunc(currPoint);
+        double nearestObjectDest = nearestObject->destFunc(currPoint, nearestObject);
         rayLength += nearestObjectDest;
         if(nearestObjectDest <= NEAR)
         {
-            double light = getLight(maxRayLength - rayLength, currPoint, getNormal(currPoint), lightPos, lightPower) / 100;
+            double light = getLight(maxRayLength - rayLength, currPoint, nearestObject->getNormal(currPoint, nearestObject), lightPos, lightPower) / 100;
 
             size_t r = nearestObject->color.r / light;
             if(r > 255) r = 255;
@@ -99,7 +99,8 @@ double getLight(double maxRayLength, Vec3 & startPoint, Vec3 tracingNorm, Vec3 &
     double rayLength = 0.0;
     for(; rayLength <= maxRayLength;)
     {
-        double nearestObjectDest = getNearestObject(currPoint)->destFunc(currPoint);
+        Object * currObject = getNearestObject(currPoint);
+        double nearestObjectDest = currObject->destFunc(currPoint, currObject);
         rayLength += nearestObjectDest;
         if(nearestObjectDest <= NEAR)
         {
@@ -115,33 +116,22 @@ double getLight(double maxRayLength, Vec3 & startPoint, Vec3 tracingNorm, Vec3 &
     return 0;
 };
 
-// double getLight(Vec3 & point, Vec3 & lightPos)
+// inline Vec3 getNormal(Vec3 & p)
 // {
-//     if( lightPos.dest( point + ( getNormal(point) * lightPos.dest(point) ) ) <= 1000 )
-//     {
-//         return lightPos.dest(point);
-//     } else 
-//     {
-//         return 0;
-//     };
+//     Vec3 v0 = {p.x + NEAR, p.y, p.z};
+//     Vec3 v1 = {p.x - NEAR, p.y, p.z};
+//     Vec3 v2 = {p.x, p.y + NEAR, p.z};
+//     Vec3 v3 = {p.x, p.y - NEAR, p.z};
+//     Vec3 v4 = {p.x, p.y, p.z + NEAR};
+//     Vec3 v5 = {p.x, p.y, p.z - NEAR};
+
+//     Vec3 res = {
+//             getNearestObject(v0)->destFunc(p, nearestObject) - getNearestObject(v1)->destFunc(p, nearestObject),
+//             getNearestObject(v2)->destFunc(p, nearestObject) - getNearestObject(v3)->destFunc(p, nearestObject),
+//             getNearestObject(v4)->destFunc(p, nearestObject) - getNearestObject(v5)->destFunc(p, nearestObject)
+//         };
+//     return res.normalized();
 // };
-
-inline Vec3 getNormal(Vec3 & p)
-{
-    Vec3 v0 = {p.x + NEAR, p.y, p.z};
-    Vec3 v1 = {p.x - NEAR, p.y, p.z};
-    Vec3 v2 = {p.x, p.y + NEAR, p.z};
-    Vec3 v3 = {p.x, p.y - NEAR, p.z};
-    Vec3 v4 = {p.x, p.y, p.z + NEAR};
-    Vec3 v5 = {p.x, p.y, p.z - NEAR};
-
-    Vec3 res = {
-            getNearestObject(v0)->destFunc(p) - getNearestObject(v1)->destFunc(p),
-            getNearestObject(v2)->destFunc(p) - getNearestObject(v3)->destFunc(p),
-            getNearestObject(v4)->destFunc(p) - getNearestObject(v5)->destFunc(p)
-        };
-    return res.normalized();
-};
 
 double dot(Vec3 & a, Vec3 & b)
 {

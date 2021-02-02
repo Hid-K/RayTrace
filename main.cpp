@@ -22,20 +22,36 @@ double camZYAngle = M_PI_2;
 
 double FOV = 500;
 
-double sphere(Vec3 point)
+double sphere(Vec3 point, Object * self)
 {
-    Vec3 pos = {0,30,0};
-    return pos.dest(point) - 10;
+    return self->originPos.dest(point) - 10;
 };
 
-double infiniteDownSurface(Vec3 point)
+Vec3 sphereNormal(Vec3 point, Object * self)
+{
+    return (self->originPos - point).normalized();
+};
+
+double infiniteDownSurface(Vec3 point, Object * self)
 {
     return ( 200 - sin(point.y/10) * 10 - sin(point.x/10) * 10) - point.z;
 };
-double infiniteYSidedSurface(Vec3 point)
+
+Vec3 infiniteDownSurfaceNormal(Vec3 point, Object * self)
+{
+    return {0,0,1};
+};
+
+double infiniteYSidedSurface(Vec3 point, Object * self)
 {
     return  60 - point.y;
 };
+
+Vec3 infiniteYSidedSurfaceNormal(Vec3 point, Object * self)
+{
+    return {0,1,0};
+};
+
 void renderPixel(double maxRayLength, Vec3 startPoint, Vec3 tracingNormal, SDL_Renderer * renderer, size_t x, size_t y)
 {
     RGB currPointColor = traceRay(maxRayLength, startPoint, tracingNormal, lightPos, lightPower);
@@ -104,13 +120,13 @@ int main()
     SDL_Event event;
     char quit = 0;
 
-    Object sp = {{255,0,0}, sphere};
+    Object sp = {{255,0,0},{40,10,0}, sphere, sphereNormal};
     addNode(&sp);
 
-    Object Zsurface = {{0,255,0}, infiniteDownSurface};
+    Object Zsurface = {{0,255,0}, {0,0,0}, infiniteDownSurface, infiniteDownSurfaceNormal};
     addNode(&Zsurface);
 
-    Object Ysurface = {{0,0,255}, infiniteYSidedSurface};
+    Object Ysurface = {{0,0,255}, {0,0,0}, infiniteYSidedSurface, infiniteYSidedSurfaceNormal};
     addNode(&Ysurface);
 
     for(;quit == 0;)
