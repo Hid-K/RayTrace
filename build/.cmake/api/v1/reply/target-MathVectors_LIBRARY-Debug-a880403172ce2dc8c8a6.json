@@ -3,7 +3,7 @@
 	"artifacts" : 
 	[
 		{
-			"path" : "libRayMarch3D_LIBRARY.a"
+			"path" : "libMathVectors_LIBRARY.a"
 		}
 	],
 	"backtrace" : 1,
@@ -26,7 +26,7 @@
 			{
 				"command" : 0,
 				"file" : 0,
-				"line" : 17,
+				"line" : 12,
 				"parent" : 0
 			},
 			{
@@ -53,7 +53,7 @@
 			[
 				{
 					"backtrace" : 2,
-					"path" : "/usr/local/Cellar/sdl2/2.0.14_1/include/SDL2"
+					"path" : "/usr/local/Cellar/sdl2/2.0.18/include/SDL2"
 				}
 			],
 			"language" : "CXX",
@@ -67,13 +67,13 @@
 			},
 			"sourceIndexes" : 
 			[
-				0
+				1
 			]
 		}
 	],
-	"id" : "RayMarch3D_LIBRARY::@6890427a1f51a3e7e1df",
-	"name" : "RayMarch3D_LIBRARY",
-	"nameOnDisk" : "libRayMarch3D_LIBRARY.a",
+	"id" : "MathVectors_LIBRARY::@6890427a1f51a3e7e1df",
+	"name" : "MathVectors_LIBRARY",
+	"nameOnDisk" : "libMathVectors_LIBRARY.a",
 	"paths" : 
 	{
 		"build" : ".",
@@ -82,14 +82,14 @@
 	"sourceGroups" : 
 	[
 		{
-			"name" : "Source Files",
+			"name" : "Header Files",
 			"sourceIndexes" : 
 			[
 				0
 			]
 		},
 		{
-			"name" : "Header Files",
+			"name" : "Source Files",
 			"sourceIndexes" : 
 			[
 				1
@@ -100,13 +100,13 @@
 	[
 		{
 			"backtrace" : 1,
-			"compileGroupIndex" : 0,
-			"path" : "RayMarch3D.cpp",
+			"path" : "MathVectors.hpp",
 			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 1,
-			"path" : "RayMarch3D.hpp",
+			"compileGroupIndex" : 0,
+			"path" : "MathVectors.cpp",
 			"sourceGroupIndex" : 1
 		}
 	],

@@ -6,9 +6,10 @@
 			[
 				{
 					"build" : ".",
+					"jsonFile" : "directory-.-Debug-f5ebdc15457944623624.json",
 					"minimumCMakeVersion" : 
 					{
-						"string" : "2.8"
+						"string" : "3.2.0"
 					},
 					"projectIndex" : 0,
 					"source" : ".",
@@ -42,21 +43,21 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "MathVectors_LIBRARY::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-MathVectors_LIBRARY-Debug-9df3e21f32cd9e815eb3.json",
+					"jsonFile" : "target-MathVectors_LIBRARY-Debug-a880403172ce2dc8c8a6.json",
 					"name" : "MathVectors_LIBRARY",
 					"projectIndex" : 0
 				},
 				{
 					"directoryIndex" : 0,
 					"id" : "RayMarch3D_LIBRARY::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-RayMarch3D_LIBRARY-Debug-e8cde9ca9814429ccfb6.json",
+					"jsonFile" : "target-RayMarch3D_LIBRARY-Debug-90f8647cf46e41c7e81d.json",
 					"name" : "RayMarch3D_LIBRARY",
 					"projectIndex" : 0
 				},
 				{
 					"directoryIndex" : 0,
 					"id" : "Raymarcher::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-Raymarcher-Debug-8a780245948218c19bb5.json",
+					"jsonFile" : "target-Raymarcher-Debug-425dc3958a13f9565f87.json",
 					"name" : "Raymarcher",
 					"projectIndex" : 0
 				}
@@ -66,12 +67,12 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "/Users/laptevaleksander/Documents/Projects/RayTrace/build",
-		"source" : "/Users/laptevaleksander/Documents/Projects/RayTrace"
+		"build" : "/Users/laptevaleksander/Documents/GitHub/RayTrace/build",
+		"source" : "/Users/laptevaleksander/Documents/GitHub/RayTrace"
 	},
 	"version" : 
 	{
 		"major" : 2,
-		"minor" : 2
+		"minor" : 3
 	}
 }

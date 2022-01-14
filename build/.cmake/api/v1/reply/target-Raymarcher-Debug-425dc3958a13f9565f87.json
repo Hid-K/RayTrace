@@ -71,7 +71,7 @@
 			[
 				{
 					"backtrace" : 5,
-					"path" : "/usr/local/Cellar/sdl2/2.0.14_1/include/SDL2"
+					"path" : "/usr/local/Cellar/sdl2/2.0.18/include/SDL2"
 				}
 			],
 			"language" : "CXX",
@@ -92,12 +92,12 @@
 	"dependencies" : 
 	[
 		{
-			"backtrace" : 4,
-			"id" : "RayMarch3D_LIBRARY::@6890427a1f51a3e7e1df"
-		},
-		{
 			"backtrace" : 3,
 			"id" : "MathVectors_LIBRARY::@6890427a1f51a3e7e1df"
+		},
+		{
+			"backtrace" : 4,
+			"id" : "RayMarch3D_LIBRARY::@6890427a1f51a3e7e1df"
 		}
 	],
 	"id" : "Raymarcher::@6890427a1f51a3e7e1df",
@@ -115,7 +115,7 @@
 			},
 			{
 				"backtrace" : 2,
-				"fragment" : "-L/usr/local/Cellar/sdl2/2.0.14_1/lib  -lSDL2",
+				"fragment" : "-L/usr/local/Cellar/sdl2/2.0.18/lib  -lSDL2",
 				"role" : "libraries"
 			},
 			{

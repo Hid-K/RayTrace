@@ -1,5 +1,5 @@
-/Users/laptevaleksander/Documents/Projects/RayTrace/build/CMakeFiles/rebuild_cache.dir
-/Users/laptevaleksander/Documents/Projects/RayTrace/build/CMakeFiles/edit_cache.dir
-/Users/laptevaleksander/Documents/Projects/RayTrace/build/CMakeFiles/Raymarcher.dir
-/Users/laptevaleksander/Documents/Projects/RayTrace/build/CMakeFiles/RayMarch3D_LIBRARY.dir
-/Users/laptevaleksander/Documents/Projects/RayTrace/build/CMakeFiles/MathVectors_LIBRARY.dir
+/Users/laptevaleksander/Documents/GitHub/RayTrace/build/CMakeFiles/rebuild_cache.dir
+/Users/laptevaleksander/Documents/GitHub/RayTrace/build/CMakeFiles/edit_cache.dir
+/Users/laptevaleksander/Documents/GitHub/RayTrace/build/CMakeFiles/Raymarcher.dir
+/Users/laptevaleksander/Documents/GitHub/RayTrace/build/CMakeFiles/RayMarch3D_LIBRARY.dir
+/Users/laptevaleksander/Documents/GitHub/RayTrace/build/CMakeFiles/MathVectors_LIBRARY.dir

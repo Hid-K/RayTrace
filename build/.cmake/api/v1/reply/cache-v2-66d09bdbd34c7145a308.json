@@ -15,7 +15,7 @@
 				}
 			],
 			"type" : "FILEPATH",
-			"value" : "CMAKE_ADDR2LINE-NOTFOUND"
+			"value" : "/usr/local/opt/binutils/bin/addr2line"
 		},
 		{
 			"name" : "CMAKE_AR",
@@ -55,7 +55,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "/Users/laptevaleksander/Documents/Projects/RayTrace/build"
+			"value" : "/Users/laptevaleksander/Documents/GitHub/RayTrace/build"
 		},
 		{
 			"name" : "CMAKE_CACHE_MAJOR_VERSION",
@@ -79,7 +79,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "19"
+			"value" : "21"
 		},
 		{
 			"name" : "CMAKE_CACHE_PATCH_VERSION",
@@ -91,7 +91,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "2"
+			"value" : "0"
 		},
 		{
 			"name" : "CMAKE_COMMAND",
@@ -103,7 +103,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "/usr/local/Cellar/cmake/3.19.2/bin/cmake"
+			"value" : "/usr/local/Cellar/cmake/3.21.0/bin/cmake"
 		},
 		{
 			"name" : "CMAKE_CPACK_COMMAND",
@@ -115,7 +115,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "/usr/local/Cellar/cmake/3.19.2/bin/cpack"
+			"value" : "/usr/local/Cellar/cmake/3.21.0/bin/cpack"
 		},
 		{
 			"name" : "CMAKE_CTEST_COMMAND",
@@ -127,7 +127,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "/usr/local/Cellar/cmake/3.19.2/bin/ctest"
+			"value" : "/usr/local/Cellar/cmake/3.21.0/bin/ctest"
 		},
 		{
 			"name" : "CMAKE_CXX_COMPILER",
@@ -142,7 +142,7 @@
 					"value" : "CXX compiler"
 				}
 			],
-			"type" : "STRING",
+			"type" : "FILEPATH",
 			"value" : "/Library/Developer/CommandLineTools/usr/bin/c++"
 		},
 		{
@@ -238,7 +238,7 @@
 					"value" : "C compiler"
 				}
 			],
-			"type" : "STRING",
+			"type" : "FILEPATH",
 			"value" : "/Library/Developer/CommandLineTools/usr/bin/cc"
 		},
 		{
@@ -335,7 +335,7 @@
 				}
 			],
 			"type" : "FILEPATH",
-			"value" : "CMAKE_DLLTOOL-NOTFOUND"
+			"value" : "/usr/local/opt/binutils/bin/dlltool"
 		},
 		{
 			"name" : "CMAKE_EXECUTABLE_FORMAT",
@@ -346,7 +346,7 @@
 					"value" : "Executable file format"
 				}
 			],
-			"type" : "STRING",
+			"type" : "INTERNAL",
 			"value" : "MACHO"
 		},
 		{
@@ -511,7 +511,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "/Users/laptevaleksander/Documents/Projects/RayTrace"
+			"value" : "/Users/laptevaleksander/Documents/GitHub/RayTrace"
 		},
 		{
 			"name" : "CMAKE_INSTALL_NAME_TOOL",
@@ -695,7 +695,7 @@
 				}
 			],
 			"type" : "FILEPATH",
-			"value" : "CMAKE_OBJCOPY-NOTFOUND"
+			"value" : "/usr/local/opt/binutils/bin/objcopy"
 		},
 		{
 			"name" : "CMAKE_OBJDUMP",
@@ -827,7 +827,7 @@
 				}
 			],
 			"type" : "FILEPATH",
-			"value" : "CMAKE_READELF-NOTFOUND"
+			"value" : "/usr/local/opt/binutils/bin/readelf"
 		},
 		{
 			"name" : "CMAKE_ROOT",
@@ -839,7 +839,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "/usr/local/Cellar/cmake/3.19.2/share/cmake"
+			"value" : "/usr/local/Cellar/cmake/3.21.0/share/cmake"
 		},
 		{
 			"name" : "CMAKE_SHARED_LINKER_FLAGS",
@@ -1087,7 +1087,19 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "/Users/laptevaleksander/Documents/Projects/RayTrace/build"
+			"value" : "/Users/laptevaleksander/Documents/GitHub/RayTrace/build"
+		},
+		{
+			"name" : "Raymarcher_IS_TOP_LEVEL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "ON"
 		},
 		{
 			"name" : "Raymarcher_SOURCE_DIR",
@@ -1099,7 +1111,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "/Users/laptevaleksander/Documents/Projects/RayTrace"
+			"value" : "/Users/laptevaleksander/Documents/GitHub/RayTrace"
 		},
 		{
 			"name" : "SDL2_DIR",
